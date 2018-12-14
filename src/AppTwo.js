@@ -31,7 +31,7 @@ class AppTwo extends React.Component {
     return false;
   };
 
-  hasNote = () => {
+  hasNewNote = () => {
     const { note } = this.state;
 
     if (note.trim()) {
@@ -51,7 +51,7 @@ class AppTwo extends React.Component {
     event.preventDefault();
     if (this.hasExistingNote()) {
       this.handleUpdateNote();
-    } else if (this.hasNote()) {
+    } else if (this.hasNewNote()) {
       const input = { note };
       const result = await API.graphql(graphqlOperation(createNote, { input }));
       const newNote = result.data.createNote;
@@ -77,7 +77,7 @@ class AppTwo extends React.Component {
       updatedNote,
       ...notes.slice(index + 1)
     ];
-    this.setState({ notes: updatedNotes, note: "", id: "", index: "" });
+    this.setState({ notes: updatedNotes, note: "", id: "" });
   };
 
   handleSetNote = ({ note, id }) => this.setState({ note, id });
